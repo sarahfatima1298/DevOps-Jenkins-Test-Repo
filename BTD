@@ -1,0 +1,19 @@
+node {
+    stage('Build') {
+        // Perform build steps
+        echo 'Building...'
+        // Example: sh 'mvn clean package'
+    }
+
+    stage('Test') {
+        // Perform test steps
+        echo 'Testing...'
+        // Example: sh 'mvn test'
+    }
+
+    stage('Deploy') {
+        // Perform deploy s
+        echo 'Deploying...'
+        // Example: sh 'scp target/*.war user@server:/path/to/deploy'
+    }
+}
