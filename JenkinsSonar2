@@ -28,7 +28,7 @@ pipeline {
        }
        stage('Test') {
            steps {
-              sonarSummaries()
+              //sonarSummaries()
 	     // snDevOpsSecurityResult securityResultAttributes: "{'scanner': 'Veracode','applicationName': 'PetStoreAPI-Github', 'securityToolId' : ''}"
               sh 'mvn test'
            }
