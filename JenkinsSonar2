@@ -29,7 +29,7 @@ pipeline {
        stage('Test') {
            steps {
               sonarSummaries()
-	      snDevOpsSecurityResult configurationName: "DevOps-devopsqevancouver002.service-now.com-1709901502633",securityResultAttributes: "{'scanner': 'Veracode','applicationName': 'VeraDemo10', 'securityToolId' : ''}"
+	      snDevOpsSecurityResult(configurationName: "DevOps-devopsqevancouver002.service-now.com-1709901502633",securityResultAttributes: "{'scanner': 'Veracode','applicationName': 'VeraDemo10', 'securityToolId' : ''}")
               sh 'mvn test'
            }
            post {
