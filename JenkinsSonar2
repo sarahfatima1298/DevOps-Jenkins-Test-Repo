@@ -69,7 +69,7 @@ stage('Deploy') {
 		snDevOpsPackage(configurationName: "DevOps-devopsqevancouver002.service-now.com-1709901502633",name: "${pkgName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"master"}""")
 		//snDevOpsChange changeRequestDetails: '{ "attributes": {"chg_model": "adffaa9e4370211072b7f6be5bb8f2ed"}}',configurationName: 'DevOps-rpvr3.service-now.com-1709727767377'	 	
 	         //snDevOpsChange changeRequestDetails: '{ "attributes": {"chg_model": "007c4001c343101035ae3f52c1d3aeb2"}}',configurationName: "DevOps-devopsqevancouver002.service-now.com-1709901502633"
-		snDevOpsChange(configurationName: 'DevOps-rpvr3.service-now.com-1709727767377')
+		snDevOpsChange(configurationName: "DevOps-devopsqevancouver002.service-now.com-1709901502633")
 		stageName = "Deploy"
 		changeRequestNumber = snDevOpsGetChangeNumber(changeDetails: """{"stage_name":"${stageName}"}""")
 		 //changeRequestNumber = snDevOpsGetChangeNumber changeDetails: """{ "pipeline_name": "Riya_Scripted2", "build_number": "${buildNo}", "stage_name": "Deploy", "branch_name": "master"}"""
