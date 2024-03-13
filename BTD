@@ -23,13 +23,13 @@ pipeline {
               
               sh 'mvn -B -DskipTests clean compile'
 	     // snDevOpsChange(ignoreErrors:false)
-	      sonarSummaries()
+	    
 
            }
        }
        stage('Test') {
            steps {
-              //sonarSummaries()
+                sonarSummaries()
 	      // snDevOpsSecurityResult securityResultAttributes: "{'scanner': 'Veracode','applicationName': 'VeraDemo10', 'securityToolId' : ''}"
               sh 'mvn test'
            }
