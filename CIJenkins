@@ -63,6 +63,7 @@ pipeline {
 
 		stage('Security Scan') {
 			steps {
+				echo "Running Security step ..."
 				//snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Veracode", "applicationName": "${env.VERACODE_APPLICATION_NAME}"}'
 			}
 		}
