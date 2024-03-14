@@ -21,11 +21,14 @@ pipeline {
 						echo "build 1.1 executed"
 						sh 'mvn clean'
 						sleep 10
-						snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"main"}""")
+						//snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"main"}""")
+						snDevOpsArtifact artifactsPayload: '{"artifacts":[{"name": "sa-web.jar", "version": "1.9", "repositoryName": "services-1031"}, {"name": "sa-db.jar", "version": "1.3.2", "repositoryName": "services-1032"}], "branchName": "master"}', configurationName: 'bugbash'
 				          sleep 5
-					  	snDevOpsPackage(name: "${packageName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"main"}""")
+					  	//snDevOpsPackage(name: "${packageName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"main"}""")
+						snDevOpsPackage artifactsPayload: '{"artifacts":[{"name": "sa-web.jar", "version": "1.9", "repositoryName": "services-1031"}, {"name": "sa-db.jar", "version": "1.3.2", "repositoryName": "services-1032"}], "branchName": "master"}', configurationName: 'bugbash', name: 'packageName'
 						sleep 20
 						//snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Veracode","applicationName": "PetStoreAPI-Github"}'
+						snDevOpsSecurityResult configurationName: 'bugbash', securityResultAttributes: '{"scanner": "Veracode", "applicationName": "", "buildVersion": "", "securityToolId": ""}'
 						sonarSummaries()
 						//snDevOpsChange()
 						
@@ -47,7 +50,7 @@ pipeline {
 								 //sh 'mvn test -Dpublish'
 								sleep 5
 								junit "**/target/surefire-reports/*.xml"
-							        snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Veracode","applicationName": "PetStoreAPI-Github", "securityToolId" : ""}'
+							        snDevOpsSecurityResult configurationName: 'bugbash', securityResultAttributes: '{"scanner": "Veracode", "applicationName": "", "buildVersion": "", "securityToolId": ""}'
 								sleep 15
 							}
 							post {
@@ -61,8 +64,10 @@ pipeline {
 							steps {
 								echo 'CR1'
 								sleep 10
-								snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"main"}""")
+								snDevOpsArtifact artifactsPayload: '{"artifacts":[{"name": "sa-web.jar", "version": "1.9", "repositoryName": "services-1031"}, {"name": "sa-db.jar", "version": "1.3.2", "repositoryName": "services-1032"}], "branchName": "master"}', configurationName: 'bugbash'
+								//snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"main"}""")
 								//snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Veracode","applicationName": "PetStoreAPI-Github"}'
+								snDevOpsSecurityResult configurationName: 'bugbash', securityResultAttributes: '{"scanner": "Veracode", "applicationName": "", "buildVersion": "", "securityToolId": ""}'
 								/*snDevOpsChange(changeRequestDetails: """
 								  {
 								    "setCloseCode": false,
@@ -78,7 +83,23 @@ pipeline {
 								            "end_date": "2022-01-08 11:59:59"
 								      }
 								}""")*/
-							}
+								snDevOpsChange changeCreationTimeOut: 3600, changeRequestDetails: '{
+								   "attributes": {
+									    "short_description": "Test description",
+									    "priority": "1",
+									    "start_date": "2021-02-05 08:00:00",
+									    "end_date": "2022-04-05 08:00:00",
+									    "justification": "test justification",
+									    "description": "test description",
+									    "cab_required": true,
+									    "comments": "This update for work notes is from jenkins file",
+									    "work_notes": "test work notes",
+									    "assignment_group": "a715cd759f2002002920bde8132e7018"
+								  },
+								  "setCloseCode": false,
+								  "autoCloseChange": true
+								}', changeStepTimeOut: 18000, configurationName: 'bugbash', pollingInterval: 60
+							}							
 						}
 
 					} // end of stages
@@ -93,8 +114,8 @@ pipeline {
 								sleep 5
 								//junit "**/target/surefire-reports/*.xml"
 								sleep 15
-								//sonarSummaries()
-							       // snDevOpsChange()
+								sonarSummaries()
+							        snDevOpsChange()
 								
 							}
 							post {
@@ -108,7 +129,7 @@ pipeline {
 							steps {
 								echo 'CR2'
 								//sleep 10
-								//snDevOpsChange()
+								snDevOpsChange changeRequestDetails: '{ "attributes": {"chg_model": "adffaa9e4370211072b7f6be5bb8f2ed"}}',configurationName: 'bugbash'
 							}
 						}
 	
