@@ -6,6 +6,11 @@ def repoName = "riyapulusuganti/Drepo" // Ensure after forking update the repoNa
 
 pipeline {
 	agent any
+          
+          tools {
+		maven 'Maven'
+	}
+
 
 	stages {
 		stage('Register Package') {
