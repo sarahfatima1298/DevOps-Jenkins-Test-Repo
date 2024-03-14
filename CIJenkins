@@ -72,8 +72,8 @@ pipeline {
 		success{
 			script{
 				echo "${releasePipelineName}"
-				//build job: "${releasePipelineName}"
-				build job: "CDJenkins"
+				build job: "${releasePipelineName}"
+				
 			}
 		}
 	}
