@@ -115,7 +115,7 @@ pipeline {
 								//junit "**/target/surefire-reports/*.xml"
 								sleep 15
 								sonarSummaries()
-							        snDevOpsChange()
+							        snDevOpsChange configurationName: 'DevOps-wp1dcvpi9bugbashsc.service-now.com-1710405303027'
 								
 							}
 							post {
