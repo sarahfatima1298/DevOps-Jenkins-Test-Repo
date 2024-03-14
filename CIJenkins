@@ -54,7 +54,7 @@ pipeline {
 			}     
 		}
 
-		/*
+		
 		stage('Sonar Scan') {
 			steps {
 				sonarSummaries()
@@ -66,7 +66,7 @@ pipeline {
 				snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Veracode", "applicationName": "${env.VERACODE_APPLICATION_NAME}"}'
 			}
 		}
-		*/
+		
 	}
 	post{
 		success{
