@@ -83,7 +83,7 @@ pipeline {
 								            "end_date": "2022-01-08 11:59:59"
 								      }
 								}""")*/
-								snDevOpsChange changeCreationTimeOut: 3600, changeRequestDetails: '{
+								snDevOpsChange changeCreationTimeOut: 3600, changeRequestDetails: """{
 								   "attributes": {
 									    "short_description": "Test description",
 									    "priority": "1",
@@ -98,7 +98,7 @@ pipeline {
 								  },
 								  "setCloseCode": false,
 								  "autoCloseChange": true
-								}', changeStepTimeOut: 18000, configurationName: 'bugbash', pollingInterval: 60
+								}""", changeStepTimeOut: 18000, configurationName: 'bugbash', pollingInterval: 60
 							}							
 						}
 
