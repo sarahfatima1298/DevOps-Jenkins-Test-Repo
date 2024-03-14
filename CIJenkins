@@ -1,0 +1,93 @@
+def artifactname = "app-devops-artifact-ci.jar"
+def version = "1.${BUILD_NUMBER}"
+def semanticVersion = "1.${BUILD_NUMBER}.0"
+def repoName = "Drepo/ServiceNow-DevOps-Change-Sample" // Ensure after forking update the repoName accrodingly.
+def releasePipelineName = "CDJenkins" //Ensure you enter the correct release pipeline name that you have created in Jenkins
+
+pipeline {
+	agent any
+	
+	tools {
+		maven 'Maven'
+	}
+
+	environment {
+		SCANNER_HOME = tool 'sonarScanner'
+		VERACODE_APPLICATION_NAME = 'PetStoreAPI-Github' //Ensure you update the correct Application name
+		VERACODE_SCANNER_NAME = 'Veracode'
+	} 
+
+	stages {
+		stage('Build') {
+			steps {
+				sh 'mvn -B -DskipTests clean compile'
+			}
+		}
+
+		stage('Test') {
+			steps {
+			  	sh 'mvn test'
+				sleep(5);
+			}
+			post {
+				always {
+					junit "**/target/surefire-reports/*.xml"
+				}
+			}
+		}
+
+		stage('Register Artifact') {
+			steps {
+				snDevOpsArtifact(artifactsPayload: """
+				{
+				"artifacts":
+				[
+				    {
+				        "name": "${artifactname}",
+				        "version": "${version}",
+				        "semanticVersion": "${semanticVersion}",
+				        "repositoryName": "${repoName}"
+				    }
+				],
+				"branchName": "main"
+				}""")
+			}     
+		}
+
+		/*
+		stage('Sonar Scan') {
+			steps {
+				sonarSummaries()
+			}
+		}
+
+		stage('Security Scan') {
+			steps {
+				snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Veracode", "applicationName": "${env.VERACODE_APPLICATION_NAME}"}'
+			}
+		}
+		*/
+	}
+	post{
+		success{
+			script{
+				echo "${releasePipelineName}"
+				build job: "${releasePipelineName}"
+			}
+		}
+	}
+}
+
+def sonarSummaries() {
+	withSonarQubeEnv('sonarcloud.io'){
+	   if(fileExists("sonar-project.properties")) {
+			sh '${SCANNER_HOME}/bin/sonar-scanner'
+		} else {
+			sh 'mvn clean verify sonar:sonar \
+			    -Dsonar.login=1ff462f03228674e3a684569d716aad1aff286bb \
+			    -Dsonar.host.url=https://sonarcloud.io \
+			    -Dsonar.organization=riyapulusuganti \
+			    -Dsonar.projectKey=riyapulusuganti_Demo'
+		}
+	}
+}
