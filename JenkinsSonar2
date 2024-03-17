@@ -12,7 +12,7 @@ def currStageName = "none"
 pipeline {
   agent any
   tools {
-       maven 'Maven'
+       maven 'rama01Maven'
    }
    environment {
 	 SCANNER_HOME = tool 'sonarScanner'
