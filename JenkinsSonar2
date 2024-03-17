@@ -15,7 +15,7 @@ pipeline {
        maven 'rama01Maven'
    }
    environment {
-	 SCANNER_HOME = tool 'sonarScanner'
+	 SCANNER_HOME = tool 'sonarcloud.io'
 	}  
   stages {
        stage('Build !@') {
