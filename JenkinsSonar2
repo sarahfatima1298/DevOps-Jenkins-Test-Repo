@@ -14,9 +14,9 @@ pipeline {
   tools {
        maven 'rama01Maven'
    }
-   environment {
+   /*environment {
 	 SCANNER_HOME = tool 'sonarcloud.io'
-	}  
+	}  */
   stages {
        stage('Build !@') {
            steps {
@@ -103,15 +103,15 @@ stage('Deploy') {
 
  def sonarSummaries() {
 	withSonarQubeEnv('sonarcloud.io'){
-	   if(fileExists("sonar-project.properties")) {
+	   /*if(fileExists("sonar-project.properties")) {
 			sh '${SCANNER_HOME}/bin/sonar-scanner'
-		} else {
+		} else {*/
 			sh 'mvn clean verify sonar:sonar \
 			    -Dsonar.login=1ff462f03228674e3a684569d716aad1aff286bb \
 			    -Dsonar.host.url=https://sonarcloud.io \
 			    -Dsonar.organization=riyapulusuganti \
 			    -Dsonar.projectKey=riyapulusuganti_Demo'
-		}
+		//}
 	}
 	//timeout(time: 1, unit: 'MINUTES') {
 		//waitForQualityGate abortPipeline: false
