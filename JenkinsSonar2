@@ -20,7 +20,7 @@ pipeline {
   stages {
        stage('Build !@') {
            steps {
-
+		echo Jenkins.getInstance().getComputer(env['NODE_NAME']).getHostName()
               sh 'mvn -B -DskipTests clean compile'
 	     // snDevOpsChange(ignoreErrors:false)
 	     // sonarSummaries()
