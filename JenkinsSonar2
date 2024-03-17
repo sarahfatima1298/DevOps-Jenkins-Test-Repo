@@ -43,12 +43,12 @@ pipeline {
                  steps {
                     
                     echo 'Deploying the change....'
-		    snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"master"}""")
-           	    snDevOpsPackage(name: "${pkgName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"master"}""")
+		  //  snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"master"}""")
+           	    //snDevOpsPackage(name: "${pkgName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"master"}""")
 		  //  snDevOpsChange changeRequestDetails: '{ "attributes": { "type": "Emergency", "standard_change_template": "62d10fa1c303101035ae3f52c1d3aec1"}}'
 		     // snDevOpsChange changeCreationTimeOut: 3600, changeRequestDetails: '{ "attributes": { "short_description": "Test description", "priority": "1", "start_date": "2021-02-05 08:00:00", "end_date": "2022-04-05 08:00:00", "justification": "test justification", "description": "test description", "cab_required": true, "comments": "This update for work notes is from jenkins file", "work_notes": "test work notes", "assignment_group": "a715cd759f2002002920bde8132e7018" }, "setCloseCode": false }', changeStepTimeOut: 18000, pollingInterval: 30
                      // sonarSummaries()
-                     snDevOpsSecurityResult securityResultAttributes: "{'scanner': 'Veracode','applicationName': 'PetStoreAPI-Github', 'securityToolId' : '8462c9c6c32f351027b51185e001311c'}"
+                   //  snDevOpsSecurityResult securityResultAttributes: "{'scanner': 'Veracode','applicationName': 'PetStoreAPI-Github', 'securityToolId' : '8462c9c6c32f351027b51185e001311c'}"
 		    // snDevOpsChange()	
                     // snDevOpsChange changeRequestDetails: '{ "attributes": {"chg_model": "adffaa9e4370211072b7f6be5bb8f2ed"}}',
 		     changeRequestNumber = snDevOpsGetChangeNumber(changeDetails: """{"build_number":"${env.BUILD_NUMBER}"}""")
@@ -66,8 +66,8 @@ stage('Deploy') {
 		//sh 'mvn -B package --file pom.xml'    
                 echo 'Running deploy stage' 
 	       // snDevOpsSecurityResult configurationName: "DevOps-devopsqevancouver002.service-now.com-1709901502633",securityResultAttributes: "{'scanner': 'Veracode','applicationName': 'PetStoreAPI-Github', 'securityToolId' : ''}"
-		snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"master"}""")
-		snDevOpsPackage(name: "${pkgName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"master"}""")
+		//snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"master"}""")
+		//snDevOpsPackage(name: "${pkgName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"master"}""")
 		//snDevOpsChange changeRequestDetails: '{ "attributes": {"chg_model": "adffaa9e4370211072b7f6be5bb8f2ed"}}',configurationName: 'DevOps-rpvr3.service-now.com-1709727767377'	 	
 	         snDevOpsChange changeRequestDetails: '{ "attributes": {"chg_model": "007c4001c343101035ae3f52c1d3aeb2"}}'
 		//snDevOpsChange()
@@ -76,7 +76,7 @@ stage('Deploy') {
 		 //changeRequestNumber = snDevOpsGetChangeNumber changeDetails: """{ "pipeline_name": "Riya_Scripted2", "build_number": "${buildNo}", "stage_name": "Deploy", "branch_name": "master"}"""
 	       // snDevOpsChange changeCreationTimeOut: 3600, changeRequestDetails: '{ "attributes": { "short_description": "Test description", "priority": "1", "start_date": "2024-01-11 08:00:00", "end_date": "2024-01-11 08:00:00", "justification": "test justification", "description": "test description", "cab_required": true, "comments": "This update for work notes is from jenkins file", "work_notes": "test work notes", "assignment_group": "a715cd759f2002002920bde8132e7018" }, "setCloseCode": false }', changeStepTimeOut: 18000, pollingInterval: 30
 		echo "${changeRequestNumber}"
-		snDevOpsUpdateChangeInfo(changeRequestDetails: 
+		/*snDevOpsUpdateChangeInfo(changeRequestDetails: 
                         """{
 			    "close_code": "successful",
 			    "state": "3", 
@@ -93,7 +93,7 @@ stage('Deploy') {
                         }""", 
                         changeRequestNumber: """${changeRequestNumber}""")
 		 
-		}
+		}*/
             }
            
         }
