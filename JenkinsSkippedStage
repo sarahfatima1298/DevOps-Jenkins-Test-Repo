@@ -18,6 +18,7 @@ pipeline {
 			}
 			steps {
 				echo 'Running test stage'
+				return env.SKIP_TEST == 'true'
 				// error 'Failing the Test stage'
 			}
 		}
