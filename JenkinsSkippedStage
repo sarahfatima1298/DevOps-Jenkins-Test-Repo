@@ -14,11 +14,14 @@ pipeline {
 		}
 		stage('Test') {
 			when {
+                              expression {
 				equals expected: 2, actual: 2
+				return env.SKIP_TEST == 'true'
+			   }
 			}
 			steps {
 				echo 'Running test stage'
-				return env.SKIP_TEST == 'true'
+				
 				// error 'Failing the Test stage'
 			}
 		}
