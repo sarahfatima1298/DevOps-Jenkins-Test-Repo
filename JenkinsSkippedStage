@@ -1,11 +1,19 @@
 pipeline {
 	agent any
+        environment {
+        	SKIP_BUILD = 'true'
+        	SKIP_TEST = 'true'
+    }
 	tools {
 		maven "Maven"
 	}
 	stages {
 		stage('Build') {
 			when {
+				expression {
+				equals expected: 2, actual: 2
+				return env.SKIP_BUILD == 'true'
+			   }
 				equals expected: 2, actual: 2
 			}
 			steps {
