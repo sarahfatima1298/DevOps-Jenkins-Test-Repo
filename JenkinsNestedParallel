@@ -21,13 +21,13 @@ pipeline {
 						echo "build 1.1 executed"
 						sh 'mvn clean'
 						sleep 10
-						//snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"main"}""")
-						snDevOpsArtifact artifactsPayload: '{"artifacts":[{"name": "sa-web.jar", "version": "1.9", "repositoryName": "services-1031"}, {"name": "sa-db.jar", "version": "1.3.2", "repositoryName": "services-1032"}], "branchName": "master"}', configurationName: 'DevOps-wp1dcvpi9bugbashsc.service-now.com-1710405303027'
+						snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"main"}""")
+						//snDevOpsArtifact artifactsPayload: '{"artifacts":[{"name": "sa-web.jar", "version": "1.9", "repositoryName": "services-1031"}, {"name": "sa-db.jar", "version": "1.3.2", "repositoryName": "services-1032"}], "branchName": "master"}', configurationName: 'DevOps-wp1dcvpi9bugbashsc.service-now.com-1710405303027'
 				          sleep 5
-					  	//snDevOpsPackage(name: "${packageName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"main"}""")
-						snDevOpsPackage artifactsPayload: '{"artifacts":[{"name": "sa-web.jar", "version": "1.9", "repositoryName": "services-1031"}, {"name": "sa-db.jar", "version": "1.3.2", "repositoryName": "services-1032"}], "branchName": "master"}', configurationName: 'DevOps-wp1dcvpi9bugbashsc.service-now.com-1710405303027', name: 'packageName'
+					  	snDevOpsPackage(name: "${packageName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"main"}""")
+						//snDevOpsPackage artifactsPayload: '{"artifacts":[{"name": "sa-web.jar", "version": "1.9", "repositoryName": "services-1031"}, {"name": "sa-db.jar", "version": "1.3.2", "repositoryName": "services-1032"}], "branchName": "master"}', configurationName: 'DevOps-wp1dcvpi9bugbashsc.service-now.com-1710405303027', name: 'packageName'
 						sleep 20
-						//snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Veracode","applicationName": "PetStoreAPI-Github"}'
+						snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Veracode","applicationName": "PetStoreAPI-Github"}'
 						//snDevOpsSecurityResult configurationName: 'DevOps-wp1dcvpi9bugbashsc.service-now.com-1710405303027', securityResultAttributes: '{"scanner": "Veracode", "applicationName": "PetStoreAPI-Github", "buildVersion": "", "securityToolId": ""}'
 						sonarSummaries()
 						//snDevOpsChange()
@@ -50,7 +50,7 @@ pipeline {
 								 //sh 'mvn test -Dpublish'
 								sleep 5
 								junit "**/target/surefire-reports/*.xml"
-							       // snDevOpsSecurityResult configurationName: 'DevOps-wp1dcvpi9bugbashsc.service-now.com-1710405303027', securityResultAttributes: '{"scanner": "Veracode", "applicationName": "PetStoreAPI-Github", "buildVersion": "", "securityToolId": ""}'
+							     //   snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Veracode","applicationName": "PetStoreAPI-Github"}'
 								sleep 15
 							}
 							post {
@@ -68,7 +68,7 @@ pipeline {
 								//snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"main"}""")
 								//snDevOpsSecurityResult securityResultAttributes: '{"scanner": "Veracode","applicationName": "PetStoreAPI-Github"}'
 								//snDevOpsSecurityResult configurationName: 'DevOps-wp1dcvpi9bugbashsc.service-now.com-1710405303027', securityResultAttributes: '{"scanner": "Veracode", "applicationName": "PetStoreAPI-Github", "buildVersion": "", "securityToolId": ""}'
-								/*snDevOpsChange(changeRequestDetails: """
+								snDevOpsChange(changeRequestDetails: """
 								  {
 								    "setCloseCode": false,
 								         "attributes": {
@@ -82,8 +82,8 @@ pipeline {
 								            "start_date": "2022-01-05 11:59:59",
 								            "end_date": "2022-01-08 11:59:59"
 								      }
-								}""")*/
-								snDevOpsChange changeCreationTimeOut: 3600, changeRequestDetails: """{
+								}""")
+								/*snDevOpsChange changeCreationTimeOut: 3600, changeRequestDetails: """{
 								   "attributes": {
 									    "short_description": "Test description",
 									    "priority": "1",
@@ -98,7 +98,7 @@ pipeline {
 								  },
 								  "setCloseCode": false,
 								  "autoCloseChange": true
-								}""", changeStepTimeOut: 18000, configurationName: 'DevOps-wp1dcvpi9bugbashsc.service-now.com-1710405303027', pollingInterval: 60
+								}""", changeStepTimeOut: 18000, configurationName: 'DevOps-wp1dcvpi9bugbashsc.service-now.com-1710405303027', pollingInterval: 60*/
 							}							
 						}
 
@@ -115,7 +115,7 @@ pipeline {
 								//junit "**/target/surefire-reports/*.xml"
 								sleep 15
 								sonarSummaries()
-							        snDevOpsChange configurationName: 'DevOps-wp1dcvpi9bugbashsc.service-now.com-1710405303027'
+							       // snDevOpsChange configurationName: 'DevOps-wp1dcvpi9bugbashsc.service-now.com-1710405303027'
 								
 							}
 							post {
@@ -129,7 +129,7 @@ pipeline {
 							steps {
 								echo 'CR2'
 								//sleep 10
-								snDevOpsChange changeRequestDetails: '{ "attributes": {"chg_model": "adffaa9e4370211072b7f6be5bb8f2ed"}}',configurationName: 'DevOps-wp1dcvpi9bugbashsc.service-now.com-1710405303027'
+								snDevOpsChange changeRequestDetails: '{ "attributes": {"chg_model": "adffaa9e4370211072b7f6be5bb8f2ed"}}'
 							}
 						}
 	
