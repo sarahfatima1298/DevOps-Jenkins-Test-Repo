@@ -28,7 +28,7 @@ pipeline {
             steps {
                 echo 'This is Stage 2'
 		sh 'mvn -B package --file pom.xml'
-		snDevOpsSecurityResult securityResultAttributes: "{'scanner': 'Veracode','applicationName': 'VeraDemo10', 'securityToolId' : ''}"
+		//snDevOpsSecurityResult securityResultAttributes: "{'scanner': 'Veracode','applicationName': 'VeraDemo10', 'securityToolId' : ''}"
                 // Your steps for Stage 2
 		sh 'mvn test'
 
