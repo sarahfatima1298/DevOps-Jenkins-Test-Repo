@@ -213,13 +213,7 @@ pipeline {
                 // Your steps for Stage 30
             }
         }
-    }
-    
-    // Add post-build actions if needed
-    post {
-        // Your post-build actions
-    }
-  def sonarSummaries() {
+      def sonarSummaries() {
 	withSonarQubeEnv('sonarcloud.io'){
 	   if(fileExists("sonar-project.properties")) {
 			sh '${SCANNER_HOME}/bin/sonar-scanner'
@@ -232,5 +226,12 @@ pipeline {
 		}
 	}
 
+   
+    }
+    
+    // Add post-build actions if needed
+    post {
+        // Your post-build actions
+    }
   
 }
