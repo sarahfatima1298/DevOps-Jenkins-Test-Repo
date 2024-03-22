@@ -215,10 +215,7 @@ pipeline {
         }
       }
     
-    // Add post-build actions if needed
-    post {
-        // Your post-build actions
-    }
+  
   
  
 }
