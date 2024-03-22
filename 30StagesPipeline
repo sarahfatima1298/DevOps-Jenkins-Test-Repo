@@ -1,0 +1,207 @@
+def artifactname = "devops-snow-build-app.jar"
+def repoName = "JenkinsDevOpsProject"
+def pipelineName = "SunilPipelines/Sunil-Scripted-Pipeline-Sonar"
+def semanticVersion = "${env.BUILD_NUMBER}.0.0"
+def packageName = "devops-snow-build-pkg_${env.BUILD_NUMBER}"
+def version = "${env.BUILD_NUMBER}.0"
+def pkgName = "devops-snow-build-pkg_${env.BUILD_NUMBER}"
+def changeRequestNumber = "null"
+def buildNo ="${env.BUILD_NUMBER}"
+def currStageName = "none"
+
+pipeline {
+    agent any
+      tools {
+        maven 'Maven'
+   }
+   environment {
+	     SCANNER_HOME = tool 'sonarScanner'
+	}  
+    stages {
+        stage('Stage 1') {
+            steps {
+                echo 'This is Stage 1'
+                sh 'mvn -B -DskipTests clean compile'
+            }
+        }
+        stage('Stage 2') {
+            steps {
+                echo 'This is Stage 2'
+                // Your steps for Stage 2
+            }
+        }
+        stage('Stage 3') {
+            steps {
+                echo 'This is Stage 3'
+                // Your steps for Stage 3
+            }
+        }
+        stage('Stage 4') {
+            steps {
+                echo 'This is Stage 4'
+                // Your steps for Stage 4
+            }
+        }
+        stage('Stage 5') {
+            steps {
+                echo 'This is Stage 5'
+                // Your steps for Stage 5
+            }
+        }
+        stage('Stage 6') {
+            steps {
+                echo 'This is Stage 6'
+                // Your steps for Stage 6
+            }
+        }
+        stage('Stage 7') {
+            steps {
+                echo 'This is Stage 7'
+                // Your steps for Stage 7
+            }
+        }
+        stage('Stage 8') {
+            steps {
+                echo 'This is Stage 8'
+                // Your steps for Stage 8
+            }
+        }
+        stage('Stage 9') {
+            steps {
+                echo 'This is Stage 9'
+                // Your steps for Stage 9
+            }
+        }
+        stage('Stage 10') {
+            steps {
+                echo 'This is Stage 10'
+                // Your steps for Stage 10
+            }
+        }
+        stage('Stage 11') {
+            steps {
+                echo 'This is Stage 11'
+                // Your steps for Stage 11
+            }
+        }
+        stage('Stage 12') {
+            steps {
+                echo 'This is Stage 12'
+                // Your steps for Stage 12
+            }
+        }
+        stage('Stage 13') {
+            steps {
+                echo 'This is Stage 13'
+                // Your steps for Stage 13
+            }
+        }
+        stage('Stage 14') {
+            steps {
+                echo 'This is Stage 14'
+                // Your steps for Stage 14
+            }
+        }
+        stage('Stage 15') {
+            steps {
+                echo 'This is Stage 15'
+                // Your steps for Stage 15
+            }
+        }
+        stage('Stage 16') {
+            steps {
+                echo 'This is Stage 16'
+                // Your steps for Stage 16
+            }
+        }
+        stage('Stage 17') {
+            steps {
+                echo 'This is Stage 17'
+                // Your steps for Stage 17
+            }
+        }
+        stage('Stage 18') {
+            steps {
+                echo 'This is Stage 18'
+                // Your steps for Stage 18
+            }
+        }
+        stage('Stage 19') {
+            steps {
+                echo 'This is Stage 19'
+                // Your steps for Stage 19
+            }
+        }
+        stage('Stage 20') {
+            steps {
+                echo 'This is Stage 20'
+                // Your steps for Stage 20
+            }
+        }
+        stage('Stage 21') {
+            steps {
+                echo 'This is Stage 21'
+                // Your steps for Stage 21
+            }
+        }
+        stage('Stage 22') {
+            steps {
+                echo 'This is Stage 22'
+                // Your steps for Stage 22
+            }
+        }
+        stage('Stage 23') {
+            steps {
+                echo 'This is Stage 23'
+                // Your steps for Stage 23
+            }
+        }
+        stage('Stage 24') {
+            steps {
+                echo 'This is Stage 24'
+                // Your steps for Stage 24
+            }
+        }
+        stage('Stage 25') {
+            steps {
+                echo 'This is Stage 25'
+                // Your steps for Stage 25
+            }
+        }
+        stage('Stage 26') {
+            steps {
+                echo 'This is Stage 26'
+                // Your steps for Stage 26
+            }
+        }
+        stage('Stage 27') {
+            steps {
+                echo 'This is Stage 27'
+                // Your steps for Stage 27
+            }
+        }
+        stage('Stage 28') {
+            steps {
+                echo 'This is Stage 28'
+                // Your steps for Stage 28
+            }
+        }
+        stage('Stage 29') {
+            steps {
+                echo 'This is Stage 29'
+                // Your steps for Stage 29
+            }
+        }
+        stage('Stage 30') {
+            steps {
+                echo 'This is Stage 30'
+                // Your steps for Stage 30
+            }
+        }
+    }
+    
+    // Add post-build actions if needed
+    post {
+        // Your post-build actions
+    }
+}
