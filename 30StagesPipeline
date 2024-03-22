@@ -219,9 +219,7 @@ pipeline {
     post {
         // Your post-build actions
     }
-  
-}
- def sonarSummaries() {
+  def sonarSummaries() {
 	withSonarQubeEnv('sonarcloud.io'){
 	   if(fileExists("sonar-project.properties")) {
 			sh '${SCANNER_HOME}/bin/sonar-scanner'
@@ -233,3 +231,6 @@ pipeline {
 			    -Dsonar.projectKey=riyapulusuganti_Demo'
 		}
 	}
+
+  
+}
