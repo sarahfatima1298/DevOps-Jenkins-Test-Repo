@@ -1,6 +1,6 @@
 def artifactname = "devops-snow-build-app.jar"
 def repoName = "JenkinsDevOpsProject"
-def pipelineName = "SunilPipelines/Sunil-Scripted-Pipeline-Sonar"
+def pipelineName = "RiyaPipeline/Riya-Scripted-Pipeline"
 def semanticVersion = "${env.BUILD_NUMBER}.0.0"
 def packageName = "devops-snow-build-pkg_${env.BUILD_NUMBER}"
 def version = "${env.BUILD_NUMBER}.0"
@@ -27,19 +27,34 @@ pipeline {
         stage('Stage 2') {
             steps {
                 echo 'This is Stage 2'
+		sh 'mvn -B package --file pom.xml'
+		snDevOpsSecurityResult securityResultAttributes: "{'scanner': 'Veracode','applicationName': 'VeraDemo10', 'securityToolId' : ''}"
                 // Your steps for Stage 2
+		sh 'mvn test'
+
             }
+	   post {
+             always {
+                junit "**/target/surefire-reports/*.xml"
+             }
+           }
         }
         stage('Stage 3') {
             steps {
+		
+		snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"master"}""")
+           	snDevOpsPackage(name: "${pkgName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "versio
                 echo 'This is Stage 3'
+		sonarSummaries()
                 // Your steps for Stage 3
             }
         }
         stage('Stage 4') {
             steps {
                 echo 'This is Stage 4'
+		echo 'Deploying the change....'
                 // Your steps for Stage 4
+		snDevOpsChange changeRequestDetails: '{ "attributes": {"chg_model": "adffaa9e4370211072b7f6be5bb8f2ed"}}',
             }
         }
         stage('Stage 5') {
@@ -204,4 +219,17 @@ pipeline {
     post {
         // Your post-build actions
     }
+  
 }
+ def sonarSummaries() {
+	withSonarQubeEnv('sonarcloud.io'){
+	   if(fileExists("sonar-project.properties")) {
+			sh '${SCANNER_HOME}/bin/sonar-scanner'
+		} else {
+			sh 'mvn clean verify sonar:sonar \
+			    -Dsonar.login=1ff462f03228674e3a684569d716aad1aff286bb \
+			    -Dsonar.host.url=https://sonarcloud.io \
+			    -Dsonar.organization=riyapulusuganti \
+			    -Dsonar.projectKey=riyapulusuganti_Demo'
+		}
+	}
