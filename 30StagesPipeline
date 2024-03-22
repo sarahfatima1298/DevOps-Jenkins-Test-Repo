@@ -45,7 +45,7 @@ pipeline {
 		snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"master"}""")
            	snDevOpsPackage(name: "${pkgName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "versio
                 echo 'This is Stage 3'
-		sonarSummaries()
+		//sonarSummaries()
                 // Your steps for Stage 3
             }
         }
@@ -213,21 +213,7 @@ pipeline {
                 // Your steps for Stage 30
             }
         }
-      def sonarSummaries() {
-	withSonarQubeEnv('sonarcloud.io'){
-	   if(fileExists("sonar-project.properties")) {
-			sh '${SCANNER_HOME}/bin/sonar-scanner'
-		} else {
-			sh 'mvn clean verify sonar:sonar \
-			    -Dsonar.login=1ff462f03228674e3a684569d716aad1aff286bb \
-			    -Dsonar.host.url=https://sonarcloud.io \
-			    -Dsonar.organization=riyapulusuganti \
-			    -Dsonar.projectKey=riyapulusuganti_Demo'
-		}
-	}
-
-   
-    }
+      
     
     // Add post-build actions if needed
     post {
