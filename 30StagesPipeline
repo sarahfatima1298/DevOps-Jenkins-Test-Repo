@@ -213,7 +213,7 @@ pipeline {
                 // Your steps for Stage 30
             }
         }
-      
+      }
     
     // Add post-build actions if needed
     post {
