@@ -81,9 +81,9 @@ stage('Deploy') {
 		echo "${changeRequestNumber}"
 		snDevOpsUpdateChangeInfo(changeRequestDetails: 
                         """{
-			    "close_code": "successful",
-			   // "state": "3", 
-			    "close_notes": "Deployment to PROD was successful test 123",
+			    "close_code": "cancelled",
+			     "state": "4", 
+			    "close_notes": "Deployment to PROD was failed test 123",
                             "short_description": "Short description updated to Test description in ${currStageName} Step by ${env.BUILD_NUMBER}",
                             "priority": "1",
                             "start_date": "2021-02-05 08:00:00",
