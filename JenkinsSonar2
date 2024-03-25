@@ -23,7 +23,7 @@ pipeline {
               
               sh 'mvn -B -DskipTests clean compile'
 	     // snDevOpsChange(ignoreErrors:false)
-	      sonarSummaries()
+	    //  sonarSummaries()
 
            }
        }
