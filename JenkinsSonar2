@@ -72,7 +72,7 @@ stage('Deploy') {
 		snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"master"}""")
 		snDevOpsPackage(name: "${pkgName}-${env.BUILD_NUMBER}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}", "repositoryName": "${repoName}"}], "branchName":"master"}""")
 		//snDevOpsChange changeRequestDetails: '{ "attributes": {"chg_model": "adffaa9e4370211072b7f6be5bb8f2ed"}}',configurationName: 'DevOps-rpvr3.service-now.com-1709727767377'	 	
-	         snDevOpsChange changeRequestDetails: '{ "attributes": {"chg_model": "007c4001c343101035ae3f52c1d3aeb2"},"autoCloseChange": true}',changeStepTimeOut: 60, pollingInterval: 30
+	         snDevOpsChange changeRequestDetails: '{ "attributes": {"chg_model": "007c4001c343101035ae3f52c1d3aeb2"},"autoCloseChange": true}',changeStepTimeOut: 18000, pollingInterval: 30
 	       //snDevOpsChange()
 		stageName = "Deploy"
 		changeRequestNumber = snDevOpsGetChangeNumber(changeDetails: """{"stage_name":"${stageName}"}""")
