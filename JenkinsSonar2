@@ -90,7 +90,7 @@ stage('Deploy') {
 		snDevOpsUpdateChangeInfo(changeRequestDetails: 
                         """{
 			    "close_code": "successful",
-			   // "state": "3", 
+			    "state": "3", 
 			    "close_notes": "Deployment to PROD was failed test 123",
                             "short_description": "Short description updated to Test description in ${currStageName} Step by ${env.BUILD_NUMBER}",
                             "priority": "1",
